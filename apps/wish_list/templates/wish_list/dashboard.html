@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>My Wish List</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'wish_list/css/main.css' %}" media="screen" title="no title"  charset="utf-8">
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </header>
+    <h1>Hello, {{user.name}}</h1>
+    <h4>Your Wish List:</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Added by</th>
+                <th>Date Added</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for wish in my_wishlist %}
+            <tr>
+                <td><a href="wish_items/{{wish.item.id}}">{{wish.item.prod_name}}</a></td>
+                <td>{{ wish.item.user.name }}</td>
+                <td>{{ wish.item.created_at }}</td>
+                {% if wish.item.user.id == request.session.user_id %}
+                <td><a href="/delete/{{wish.item.id}}">Delete</a></td>
+                {% else %}
+                <td><a href="/remove/{{wish.item.id}}">Remove from my Wishlist</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h4>Other User's Wish List</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Added by</th>
+                <th>Date Added</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for wish in others_wishlist %} {% if wish.item.prod_name not in wishlist %}
+            <tr>
+                <td><a href="wish_items/{{wish.item.id}}">{{wish.item.prod_name}}</a></td>
+                <td>{{ wish.item.user.name }}</td>
+                <td>{{ wish.item.created_at }}</td>
+                <td>$ <a href="/add_wish/{{wish.item.id}}">Add to my Wishlist</a></td>
+            </tr>
+            {% endif %} {% endfor %}
+        </tbody>
+    </table>
+
+    <footer>
+        <br>
+        <br>
+        <a href="wish_items/create">Add Item</a>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{{item}}</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'wish_list/css/main.css' %}" media="screen" title="no title"  charset="utf-8">
+    </head>
+    <body>
+        <header>
+            <ul>
+                <li><a href="/dashboard">Home</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </header>
+        <h1>{{item}}</h1>
+        <h4>Users who added this product/item under their wish list:</h4>
+        {% for name in item_wishlist %}
+        <p>{{name.user.name}}</p>
+        {% endfor %}
+
+    </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Create Item</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'wish_list/css/main.css' %}" media="screen" title="no title"  charset="utf-8">
+</head>
+
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <header>
+        <ul>
+            <li><a href="/dashboard">Home</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </header>
+    <h1>Create a New Wish List Item</h1>
+    <form action="/add" method="POST">
+        {% csrf_token %}
+        <h3>Item/Product: <input type="text" name="prod_name"></h3>
+        <input type="submit" value="Add">
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+table{
+    border: 2px solid black;
+}
+td{
+    border: 2px solid black;
+}
+
+li{
+    list-style: none;
+}
+header{
+    margin-left: 75%;
+}
+
+footer{
+    margin-left: 75%;
+}
+
+.register{
+    display: inline-block;
+}
+
+.login{
+    display: inline-block;
+    vertical-align: top;
+}
+
+body{
+    margin: 20px;
+}
